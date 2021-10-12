@@ -61,19 +61,31 @@ def mark(gift_list)
 end
 
 def idea(gift_list)
+    # Ask the user what he wants to look for 
     puts "What do you want to look for?"
+    # Store his answer into a variable
     recherche = gets.chomp
+    # Create the url of the page we'll scrap
     url = "https://www.etsy.com/search?q=#{recherche}"
+    # Open the url and read it
     html = open(url).read
+    # Use Nokogiri to parse the html file into a ruby object
     doc = Nokogiri::HTML(html)
+    # Initialize our results as an array
     results = []
+    # For the first 5 title in the list
     doc.search('.v2-listing-card__title').first(5).each do |element|
+        # Add the title to our results array
         results <<  element.text.strip
     end
+    # Iterate over the results to display them
     results.each_with_index do |result, index|
         p "#{index+1} #{result}"
     end
+    # Ask the user which result he wants to add to his list
     puts "What do you want to add?"
+    # Store the index in a variable
     item_to_add = gets.chomp.to_i - 1
+    # Add the new gift to the list as a hash
     gift_list << {name: results[item_to_add], bought: false}
 end

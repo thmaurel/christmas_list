@@ -33,13 +33,14 @@ until choice == 'quit'
     # STEP 5: Add a statement for mark as bought
     elsif choice == 'mark'
         mark(gift_list)
+    # else if he wants to look for ideas
+    elsif choice == "idea"
+        idea(gift_list)
     # else if he wants to quit
     elsif choice == 'quit'
         # # Display 'Good bye'
         puts 'GoodBye'
     # else
-    elsif choice == "idea"
-        idea(gift_list)
     else
         # Display an error message
         puts "Try again!"
